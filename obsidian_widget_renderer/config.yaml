@@ -1,0 +1,27 @@
+widget_data_source: "~/Obsidian/YuriVault/99_Sync/widget-data/widget_data.json"
+output_dir: "~/Sync/widget-timetable"
+
+profiles:
+  square:
+    width: 400
+    height: 400
+    dpr: 2
+  standard:
+    width: 800
+    height: 600
+    dpr: 2
+  tall:
+    width: 540
+    height: 960
+    dpr: 2
+  # wallpaper 제거: generate_3day_bundle_v5.py (modern white)가 담당
+
+theme: "samsung-dark"
+stale_threshold_minutes: 120
+
+logging:
+  state_file: "/mnt/usb32/openclaw-data/workspace/automation/.state/obsidian_widget_state.json"
+
+cache:
+  enabled: true
+  hash_file: "~/.cache/obsidian_widget/last_hash"

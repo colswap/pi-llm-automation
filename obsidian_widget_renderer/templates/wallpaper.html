@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<style>
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/variable/pretendardvariable-dynamic-subset.min.css');
+
+:root {
+  --bg-main: #0a0a0f;
+  --bg-card: rgba(20, 20, 28, 0.85);
+  --bg-card-hover: rgba(30, 30, 40, 0.9);
+  --text-primary: #e8e8f0;
+  --text-secondary: #9898a8;
+  --text-muted: #555566;
+  --accent-school: #4ecdc4;
+  --accent-deadline: #ff6b6b;
+  --accent-personal: #7c9cff;
+  --accent-quote: #c4a7e7;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  width: 1080px;
+  height: 2340px;
+  background: var(--bg-main);
+  font-family: 'Pretendard Variable', 'Noto Sans KR', sans-serif;
+  color: var(--text-primary);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Top gradient area - clock zone (left empty for phone clock) */
+.clock-zone {
+  flex: 0 0 680px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 0 48px 32px;
+  background: linear-gradient(180deg, #0d0d18 0%, #0a0a0f 100%);
+}
+
+.date-header {
+  font-size: 52px;
+  font-weight: 800;
+  letter-spacing: -1px;
+  color: var(--text-primary);
+}
+
+.date-sub {
+  font-size: 22px;
+  color: var(--text-secondary);
+  margin-top: 4px;
+}
+
+/* Quote */
+.quote-section {
+  padding: 28px 48px;
+}
+
+.quote-text {
+  font-size: 20px;
+  font-style: italic;
+  color: var(--accent-quote);
+  line-height: 1.5;
+  opacity: 0.85;
+}
+
+/* Schedule */
+.schedule-zone {
+  flex: 1;
+  padding: 16px 36px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  overflow: hidden;
+}
+
+.section-label {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  padding: 0 12px 8px;
+}
+
+.schedule-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 18px 24px;
+  background: var(--bg-card);
+  border-radius: 20px;
+  border-left: 4px solid var(--accent-personal);
+  backdrop-filter: blur(10px);
+}
+
+.schedule-item.school { border-left-color: var(--accent-school); }
+.schedule-item.deadline { border-left-color: var(--accent-deadline); }
+.schedule-item.personal { border-left-color: var(--accent-personal); }
+
+.schedule-item.completed {
+  opacity: 0.35;
+}
+
+.time-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 70px;
+}
+
+.time-start {
+  font-size: 22px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  color: var(--text-primary);
+}
+
+.time-end {
+  font-size: 14px;
+  color: var(--text-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.event-title {
+  font-size: 22px;
+  font-weight: 500;
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.no-events {
+  text-align: center;
+  padding: 40px;
+  color: var(--text-muted);
+  font-size: 22px;
+}
+
+/* Tasks */
+.task-zone {
+  padding: 16px 36px 48px;
+}
+
+.task-item {
+  display: flex;
+  gap: 12px;
+  padding: 10px 24px;
+  font-size: 18px;
+  color: var(--text-secondary);
+}
+
+.task-item.done {
+  opacity: 0.35;
+  text-decoration: line-through;
+}
+
+/* Bottom safe area */
+.bottom-safe {
+  flex: 0 0 120px;
+  background: linear-gradient(0deg, rgba(0,0,0,0.3) 0%, transparent 100%);
+}
+
+.update-badge {
+  position: absolute;
+  bottom: 140px;
+  right: 48px;
+  font-size: 13px;
+  color: var(--text-muted);
+  opacity: 0.5;
+}
+</style>
+</head>
+<body>
+
+<div class="clock-zone">
+  <div class="date-header">{{ date.display }}</div>
+</div>
+
+{% if goals %}
+<div class="quote-section">
+  {% for goal in goals %}
+  <div class="quote-text">{{ goal }}</div>
+  {% endfor %}
+</div>
+{% endif %}
+
+<div class="schedule-zone">
+  <div class="section-label">TODAY</div>
+  {% for item in schedule %}
+  <div class="schedule-item {{ item.category }} {% if item.completed %}completed{% endif %}">
+    <div class="time-col">
+      <span class="time-start">{{ item.start }}</span>
+      <span class="time-end">{{ item.end }}</span>
+    </div>
+    <span class="event-title">{{ item.title }}</span>
+  </div>
+  {% endfor %}
+  {% if not schedule %}
+  <div class="no-events">오늘 일정이 없습니다 ✨</div>
+  {% endif %}
+</div>
+
+{% if tasks %}
+<div class="task-zone">
+  <div class="section-label">TASKS</div>
+  {% for task in tasks %}
+  <div class="task-item {% if task.completed %}done{% endif %}">
+    <span>{{ '✅' if task.completed else '⬜' }}</span>
+    <span>{{ task.text }}</span>
+  </div>
+  {% endfor %}
+</div>
+{% endif %}
+
+<div class="bottom-safe"></div>
+<div class="update-badge">{{ meta.exported_at[:16] | replace('T', ' ') }}</div>
+
+</body>
+</html>

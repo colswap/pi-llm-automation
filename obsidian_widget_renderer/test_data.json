@@ -1,0 +1,32 @@
+{
+  "meta": {
+    "version": 1,
+    "exported_at": "2026-03-09T09:15:00+09:00",
+    "vault_name": "YuriVault",
+    "plugin_version": "0.1.0",
+    "source_file": "40_Daily/2026-03-09.md"
+  },
+  "date": {
+    "iso": "2026-03-09",
+    "weekday": "\uc6d4",
+    "weekday_en": "Mon",
+    "display": "2026\ub144 3\uc6d4 9\uc77c (\uc6d4)"
+  },
+  "schedule": [
+    {"title": "\ubc14\uc774\uc54c \uc900\ube44", "start": "08:00", "end": "09:00", "completed": false, "category": "personal"},
+    {"title": "\ub531\ub7ec\ub2dd\uc758 \uae30\ucd08", "start": "09:30", "end": "10:45", "completed": true, "category": "school"},
+    {"title": "\ub300\ud559 \uae00\uc4f0\uae302(\uacfc\ud559\uae30\uc220\uae00\uc4f0\uae30)", "start": "11:00", "end": "12:15", "completed": false, "category": "school"},
+    {"title": "\ud1b5\uacc4\ud559", "start": "14:00", "end": "15:15", "completed": false, "category": "school"},
+    {"title": "\ucef4\ud4e8\ud130\uad6c\uc870", "start": "15:30", "end": "16:45", "completed": false, "category": "school"},
+    {"title": "SNUSV \uc138\uc158", "start": "19:00", "end": "22:00", "completed": false, "category": "personal"},
+    {"title": "[\ub9c8\uac10] \ucef4\uacf5 \ub2e4\uc804\uacf5\uc0dd \ud53c\uc5b4\ud29c\ud130\ub9c1 \uc2e0\uccad", "start": "23:00", "end": "23:59", "completed": false, "category": "deadline"}
+  ],
+  "tasks": [
+    {"text": "\ub9ac\ud3ec\ud2b8 \uc81c\ucd9c", "completed": false},
+    {"text": "\uc6b4\ub3d9 30\ubd84", "completed": true}
+  ],
+  "goals": [
+    "\ub531\ub7ec\ub2dd \uacfc\uc81c #3 \ub9c8\ubb34\ub9ac",
+    "\uae00\uc4f0\uae30 \ucd08\uace0 \uc644\uc131"
+  ]
+}

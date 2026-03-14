@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <style>
+{{ css }}
+  </style>
+  <style>
+    body { width: {{ width }}px; height: {{ height }}px; }
+  </style>
+</head>
+<body>
+<div class="widget-container">
+  <header class="date-header">
+    <span class="date-display">{{ date.display }}</span>
+    <span class="update-time">{{ meta.exported_at[-14:-6] if meta.exported_at|length > 14 else '' }}</span>
+  </header>
+
+  {% if goals %}
+  <section class="goal-section">
+    <h3>&#127919; &#50724;&#45720; &#47785;&#54364;</h3>
+    {% for goal in goals %}
+    <div class="goal-item">{{ goal }}</div>
+    {% endfor %}
+  </section>
+  {% endif %}
+
+  <section class="schedule-section">
+    {% for item in schedule %}
+    <div class="schedule-item {{ item.category }} {% if item.completed %}completed{% endif %}">
+      <span class="time-label">{{ item.start }}</span>
+      <span class="event-title">{{ item.title }}</span>
+    </div>
+    {% endfor %}
+    {% if not schedule %}
+    <div class="schedule-item" style="justify-content: center; color: var(--text-muted); border-left-color: transparent;">
+      &#50724;&#45720; &#51068;&#51221;&#51060; &#50630;&#49845;&#45768;&#45796;
+    </div>
+    {% endif %}
+  </section>
+
+  {% if tasks %}
+  <section class="task-section">
+    <h3>&#128203; &#53468;&#49828;&#53356;</h3>
+    {% for task in tasks %}
+    <div class="task-item {% if task.completed %}done{% endif %}">
+      <span class="checkbox">{{ '&#9745;' if task.completed else '&#9744;' }}</span>
+      <span>{{ task.text }}</span>
+    </div>
+    {% endfor %}
+  </section>
+  {% endif %}
+</div>
+</body>
+</html>
